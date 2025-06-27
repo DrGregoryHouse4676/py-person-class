@@ -9,7 +9,9 @@ class Person:
 
 def create_person_list(people_list: list) -> list:
     Person.people.clear()
-    instance = [Person(name=person_data["name"], age=person_data["age"]) for person_data in people_list]
+    instance = [Person(name=person_data["name"],
+                       age=person_data["age"])
+                for person_data in people_list]
 
     for person_data in people_list:
         person = Person.people[person_data["name"]]
