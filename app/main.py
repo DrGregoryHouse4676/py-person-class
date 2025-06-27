@@ -7,13 +7,9 @@ class Person:
         Person.people[name] = self
 
 
-def create_person_list(people_list: str) -> list:
-    instance = []
+def create_person_list(people_list: list) -> list:
     Person.people.clear()
-
-    for person_data in people_list:
-        person = Person(name=person_data["name"], age=person_data["age"])
-        instance.append(person)
+    instance = [Person(name=person_data["name"], age=person_data["age"]) for person_data in people_list]
 
     for person_data in people_list:
         person = Person.people[person_data["name"]]
