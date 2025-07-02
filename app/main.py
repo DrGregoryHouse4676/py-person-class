@@ -4,10 +4,15 @@ class Person:
     def __init__(self, name: str, age: int) -> None:
         self.name = name
         self.age = age
+        self.wife = None
+        self.husband = None
         Person.people[name] = self
 
+    def __repr__(self):
+        return f"Person(name={self.name!r}, age={self.age!r})"
 
-def create_person_list(people_list: dict) -> Person:
+
+def create_person_list(people_list: list[dict]) -> list[Person]:
     Person.people.clear()
 
     instances = [
@@ -23,14 +28,10 @@ def create_person_list(people_list: dict) -> Person:
 
         wife_name = person_data.get("wife")
         if wife_name:
-            wife_person = Person.people[wife_name]
-            person.wife = wife_person
-            wife_person.husband = person
+            person.wife = Person.people[wife_name]
 
         husband_name = person_data.get("husband")
         if husband_name:
-            husband_person = Person.people[husband_name]
-            person.husband = husband_person
-            husband_person.wife = person
+            person.husband = Person.people[husband_name]
 
     return instances
