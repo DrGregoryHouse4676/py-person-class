@@ -4,11 +4,9 @@ class Person:
     def __init__(self, name: str, age: int) -> None:
         self.name = name
         self.age = age
-        self.wife = None
-        self.husband = None
         Person.people[name] = self
 
-    def __repr__(self):
+    def __repr__(self) -> None:
         return f"Person(name={self.name!r}, age={self.age!r})"
 
 
