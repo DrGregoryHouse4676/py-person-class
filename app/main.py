@@ -10,7 +10,7 @@ class Person:
         return f"Person(name={self.name!r}, age={self.age!r})"
 
 
-def create_person_list(people_list: list[dict]) -> list[Person]:
+def create_person_list(people_list: list) -> list:
     Person.people.clear()
 
     instances = [
