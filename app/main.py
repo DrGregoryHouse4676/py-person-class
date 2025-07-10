@@ -6,30 +6,16 @@ class Person:
         self.age = age
         Person.people[name] = self
 
-    def __repr__(self) -> None:
-        return f"Person(name={self.name!r}, age={self.age!r})"
 
+def create_person_list(people: list) -> list:
+    for person in people:
+        Person(person["name"], person["age"])
 
-def create_person_list(people_list: list) -> list:
-    Person.people.clear()
+    for person in people:
+        current_person = Person.people[person["name"]]
+        if "wife" in person and person["wife"] is not None:
+            current_person.wife = Person.people[person["wife"]]
+        if "husband" in person and person["husband"] is not None:
+            current_person.husband = Person.people[person["husband"]]
 
-    instances = [
-        Person(
-            name=person_data["name"],
-            age=person_data["age"]
-        )
-        for person_data in people_list
-    ]
-
-    for person_data in people_list:
-        person = Person.people[person_data["name"]]
-
-        wife_name = person_data.get("wife")
-        if wife_name:
-            person.wife = Person.people[wife_name]
-
-        husband_name = person_data.get("husband")
-        if husband_name:
-            person.husband = Person.people[husband_name]
-
-    return instances
+    return [Person.people[person["name"]] for person in people]
